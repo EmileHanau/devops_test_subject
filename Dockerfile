@@ -10,8 +10,5 @@ ADD ./flask/sentiment-clf /app
 # install dependencies
 RUN pip3 install -r requirements.txt
 
-# run api on startup
-CMD ["python3", "build_model.py"]
-ENTRYPOINT ["python3", "app.py", "--host=0.0.0.0"]
-
-EXPOSE 5000
+## uncomment following line to have an interactiv command prompt (easy setup)
+# ENTRYPOINT ["./entry.sh"]
