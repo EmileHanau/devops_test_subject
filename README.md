@@ -21,6 +21,6 @@ Docker
 ## Windows
 TODO: add instructions for Windows
 
-### testing the api
+## testing the api
 - on your local machine use your browser and go to http://localhost:5000/?query=the+movie+is+good
 - or technically just send a GET request with: `query="the movie is good"`
