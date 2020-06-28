@@ -13,4 +13,4 @@ ADD ./flask/sentiment-clf /app
 RUN pip3 install -r requirements.txt
 
 ## uncomment following line to have an interactiv command prompt (easy setup)
-ENTRYPOINT ["./entry.sh"]
+# ENTRYPOINT ["./entry.sh"]
