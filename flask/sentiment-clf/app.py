@@ -35,6 +35,7 @@ class PredictSentiment(Resource):
     def get(self):
         # use parser and find the user's query
         args = parser.parse_args()
+        user_query = args['query']
 
         # vectorize the user's query and make a prediction
         uq_vectorized = model.vectorizer_transform(np.array([user_query]))
