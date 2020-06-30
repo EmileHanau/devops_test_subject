@@ -10,13 +10,22 @@ api = Api(app)
 model = NLPModel()
 
 clf_path = 'lib/models/SentimentClassifier.pkl'
-with open(clf_path, 'rb') as f:
-    model.clf = pickle.load(f)
+# catch exception, if modal was not trained beforehand. (lib/models/SentimentClassifier.pkl would be missing)
+try:
+    with open(clf_path, 'rb') as f:
+        model.clf = pickle.load(f)
+except:
+    print("No SentimentClassifier found. You may want to train the ai first.")
+    exit()
 
+# catch exception, if modal was not trained beforehand. (lib/models/TFIDFVectorizer.pkl would be missing)
 vec_path = 'lib/models/TFIDFVectorizer.pkl'
-with open(vec_path, 'rb') as f:
-    model.vectorizer = pickle.load(f)
-
+try:
+    with open(vec_path, 'rb') as f:
+        model.vectorizer = pickle.load(f)
+except:
+    print("No TFIDFVectorizer found. You may want to train the ai first.")
+    exit()
 # argument parsing
 parser = reqparse.RequestParser()
 parser.add_argument('query')
@@ -26,7 +35,6 @@ class PredictSentiment(Resource):
     def get(self):
         # use parser and find the user's query
         args = parser.parse_args()
-        user_query = args['query']
 
         # vectorize the user's query and make a prediction
         uq_vectorized = model.vectorizer_transform(np.array([user_query]))
